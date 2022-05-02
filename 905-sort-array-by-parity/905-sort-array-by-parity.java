@@ -1,20 +1,19 @@
 class Solution {
     public int[] sortArrayByParity(int[] nums) {
-        int i = 0, j = nums.length - 1;
+        int[] ans = new int[nums.length];
+        int t = 0;
         
-        while(i < j){
-            if(nums[i] % 2 > nums[j] % 2){
-                int temp = nums[i];
-                nums[i] = nums[j];
-                nums[j] = temp;
-            }
+        for(int i = 0; i < nums.length; ++i){
             if(nums[i] % 2 == 0)
-                i++;
-            if(nums[j] % 2 == 1)   
-                j--;
+                ans[t++] = nums[i];
         }
-        return nums;
+        
+        for(int i = 0; i < nums.length; ++i){
+            if(nums[i] % 2 == 1)
+                ans[t++] = nums[i];
+        }
+        return ans;
     }
 }
 // time O(n)
-// space O(1) In place sorting using quick sort
+// space O(n)
