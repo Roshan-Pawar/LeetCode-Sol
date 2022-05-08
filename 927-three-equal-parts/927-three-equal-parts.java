@@ -31,13 +31,14 @@ class Solution {
             }
         }
         
-// Make copy of each parts and compare 3 partions
-        int[] part1 = Arrays.copyOfRange(arr, i1, j1+1);
-        int[] part2 = Arrays.copyOfRange(arr, i2, j2+1);
-        int[] part3 = Arrays.copyOfRange(arr, i3, j3+1);
-        
-        if(!Arrays.equals(part1, part2) || !Arrays.equals(part1, part3))
-            return new int[]{-1, -1};
+        int start = i1, mid = i2,end = i3;
+        while(k-- > 0 && arr[start] == arr[mid] && arr[mid] == arr[end]){
+            start++;
+            mid++;
+            end++;
+        }
+
+        if(k >= 0) return new int[]{-1,-1};
         
 // Take care of trailing zeros
         
@@ -54,4 +55,5 @@ class Solution {
     }
 } 
 
-// Time and space O(n)
+// Time O(n)
+// Space(1)
