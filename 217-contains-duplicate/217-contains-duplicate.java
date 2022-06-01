@@ -1,25 +1,13 @@
 class Solution {
     public boolean containsDuplicate(int[] nums) {
+        Set<Integer> store = new HashSet<>();
         
-        int n = nums.length;
-        Arrays.sort(nums);
-        for(int i = 0; i < n-1; i++){
-            if(nums[i] == nums[i+1])
+        for(int i = 0; i < nums.length; i++){
+            if(!store.contains(nums[i]))
+                store.add(nums[i]);
+            else
                 return true;
         }
         return false;
-        
-        
-        
-        //Time: O(n^2) Accepted solution but it takes too long time.         
-        // int n = nums.length;
-        //     for(int i = 0; i < n; i++){
-        //         int e = nums[i];
-        //         for(int j = i+1; j < n; j++){
-        //         if(e == nums[j])
-        //             return true;
-        //         }    
-        //     }
-        // return false;
     }
 }
