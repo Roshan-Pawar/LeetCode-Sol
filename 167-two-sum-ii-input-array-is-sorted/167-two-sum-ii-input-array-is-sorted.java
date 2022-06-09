@@ -7,9 +7,11 @@ class Solution {
             int sum = numbers[a] + numbers[b];
             
             if(sum < target){
-                a += 1;
+                // increase a by 1;
+                a++;
             } else if(sum > target){
-                b -= 1;
+                // decrease b by 1
+                b--;
             } else{
                 return new int[] {a + 1, b + 1};
             }
@@ -17,3 +19,5 @@ class Solution {
          return new int[] {a + 1, b + 1};
     }
 }
+
+//  time : O(N), constant space
