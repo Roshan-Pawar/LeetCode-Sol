@@ -36,6 +36,8 @@ class Solution {
     }
 }
 
+// O(N) time and space
+
 
 
 
