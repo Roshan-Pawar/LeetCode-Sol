@@ -5,4 +5,5 @@ class Solution {
             max = Math.max(max, (n.charAt(i) - '0'));
         return max;
     }
+    // O(N) time and  space O(1)
 }
