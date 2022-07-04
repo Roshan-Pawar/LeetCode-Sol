@@ -1,33 +1,39 @@
 class Solution {
     public int candy(int[] ratings) {
-        int sum = 0, n = ratings.length;
+        if(ratings.length <= 1) return ratings.length;
         
-        // candies for left and right side of children ratings  
-        int[] left = new int[n];
-        int[] right = new int[n];
+        int candies = 0, up = 0, down = 0, prevSlope = 0;
         
-        // assign minimum 1 candy to everyone
-        Arrays.fill(left,1);
-        Arrays.fill(right,1);
-        
-        // caluculate for left side 
-        for(int i = 1; i < n;i++){
-            if(ratings[i] > ratings[i - 1])
-                left[i] = left[i - 1] + 1;
+        for(int i = 1; i < ratings.length; i++){
+            //If increasing then 1; if decreasing then -1; if equal then 0.
+            int newSlope = (ratings[i] > ratings[i - 1] ? 1
+                            : ratings[i] < ratings[i - 1] ? -1
+                            : 0);
+            
+            if((prevSlope > 0 && newSlope == 0) || (prevSlope < 0 && newSlope >= 0)){
+                candies += count(up) + count(down) + Math.max(up, down);
+                up = 0;
+                down = 0;
+            }
+            
+            //Add in up/down if slope is increasing or decreasing respectively. 
+            //If it is a plain, add a candy as it is the base case.
+            if(newSlope > 0) 
+                up++;
+            else if(newSlope < 0)
+                down++;
+            else
+                candies++;
+            
+            prevSlope = newSlope;
         }
-        
-        // Calculate for right side 
-        for(int i = n - 2; i >= 0;i--){
-            if(ratings[i] > ratings[i + 1])
-                right[i] = right[i + 1] + 1;
-        }
-        
-        // Marge both the side and take maximum candy of each childern
-        for(int i = 0; i < n;i++){
-            sum += Math.max(left[i], right[i]);
-        }
-        return sum;
+        candies += count(up) + count(down) + (Math.max(up, down) + 1);
+        return candies;
     }
-    // TC : O(n) traversing array 3 times
-    // SC : O(n) taking n extra space for left and right side
+    
+    public int count(int n){
+        return (n *(n + 1)) / 2;
+    }
+    // TC : O(n)
+    // SC : O(1)
 }
