@@ -1,33 +1,25 @@
 class Solution {
     public int longestConsecutive(int[] nums) {
-        int res = 0;
-        Set<Integer> set = new HashSet<>();
+        if(nums.length == 0)
+            return 0;
         
-        // Add all the elements in the set we don't require the duplicate ones
-        for(int i : nums) set.add(i);
+        Arrays.sort(nums);
         
-        for(int i : nums){
-            // maxLen for current "i" in nums will initially 1 and 
-            int maxLen = 1, previousVal = i - 1, nextVal = i + 1;
-            // Suppose the "i" is 4 then its previous sequence val will be 3 and next value will be 5 
-
-            // If the previous value contains in the set then increment the length of sequence 
-            // and remove that val from set and also decrement the prev val to find next element of sequence
-            while(set.contains(previousVal)){
-                maxLen++;
-                set.remove(previousVal--);
+        int res = 1;
+        int maxLen = 1;
+        
+        for(int i = 1; i < nums.length; i++){
+            if(nums[i] != nums[i - 1]){
+                if(nums[i] == nums[i - 1] + 1)
+                    maxLen++;
+                else{
+                    res = Math.max(res, maxLen);
+                    maxLen = 1;
+                }
             }
-            
-            // If the next val contains in the set then increment the len and remove that val and 
-            // Increment that value to find next sequence of it
-            while(set.contains(nextVal)){
-                maxLen++;
-                set.remove(nextVal++);
-            }
-            res = Math.max(res, maxLen);
         }
-        return res;
+        return Math.max(res, maxLen);
     }
-    // TC : O(n)
-    // SC : O(n)
+    // TC : O(n logn) for sorting the array
+    // SC : O(1)
 }
