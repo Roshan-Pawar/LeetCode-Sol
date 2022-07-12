@@ -1,12 +1,11 @@
 class Solution {
     public int[] runningSum(int[] nums) {
-        int[] ans = new int[nums.length];
-        int res = 0;
         
-        for(int i = 0; i < nums.length; i++){
-            res += nums[i];
-            ans[i] = res;
-        }
-        return ans;
+        for(int i = 1; i < nums.length; i++)
+            nums[i] += nums[i - 1];
+        
+        return nums;
     }
+    // TC : O(n) 
+    // SC : o(1)
 }
