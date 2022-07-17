@@ -1,16 +1,16 @@
 class Solution {
     public int[] numberOfPairs(int[] nums) {
-        Arrays.sort(nums);
-        int pair = 0;
+        int[] arr = new int[101];
         
-        for(int i = 0; i < nums.length; i++){
-            if(i > 0 && nums[i] == nums[i - 1]){
-                nums[i] = -1;
-                nums[i - 1] = -1;
-                pair++;
-            }
+        for(int n : nums){
+            arr[n]++;
         }
-        return new int[] {pair, nums.length - (2 * pair)};
+        
+        int[] ans = new int[2]; 
+        for(int e : arr){
+            ans[0] += e / 2;
+            ans[1] += e % 2;
+        }
+        return ans;
     }
-    // TC : O(n log n)  SC : O(2)
 }
