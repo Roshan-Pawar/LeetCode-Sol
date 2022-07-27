@@ -1,37 +1,49 @@
 class MinStack {
+    Stack<Long> s = new Stack<>();
+    Long minVal;
     
-    Stack<Integer> s = new Stack<>();
-    Stack<Integer> ss = new Stack<>();
     public MinStack() {
-        
+        minVal = Long.MAX_VALUE;
     }
     
     public void push(int val) {
-        if(ss.empty() || val <= ss.peek())
-            ss.push(val);
-        s.push(val);
+        Long value = Long.valueOf(val);
+        if(s.empty()){
+            minVal = value;
+            s.push(value);
+        } else{
+            if(value < minVal){
+                s.push(2 * value - minVal);
+                minVal = value;
+            } else{
+                s.push(value);
+            }
+        }
     }
     
     public void pop() {
         if(s.empty())
             return;
-        int ans = s.peek();
-        s.pop();
-        if(ss.peek() == ans)
-            ss.pop();
+        
+        Long value = s.pop();
+        if(value < minVal)
+            minVal = 2 * minVal - value;
     }
     
     public int top() {
-        return s.peek();
+        Long value = s.peek();
+        
+        if(value < minVal)
+            return minVal.intValue();
+        
+        return value.intValue();
     }
     
     public int getMin() {
-        if(ss.empty())
-            return -1;
-        return ss.peek();
+        return minVal.intValue();
     }
-    
-    // O(N) Space, using suportive Stack(SS) 
+    //O(N) space, by storing minEle value each time in a variable using (value * 2 - minVal)
+    // while pop() Formula minEle= (minVal * 2 - s.peek())
 }
 
 /**
