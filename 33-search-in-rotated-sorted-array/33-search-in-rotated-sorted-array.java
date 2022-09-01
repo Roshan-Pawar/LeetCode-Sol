@@ -3,7 +3,7 @@ class Solution {
         if(nums == null || nums.length == 0) return -1;
         
         int left = 0, right = nums.length-1;
-        
+        // Searching for pivot 
         while(left < right){
             int midpoint = left + (right - left) / 2;
             if(nums[midpoint] > nums[right]){
@@ -12,7 +12,7 @@ class Solution {
                 right = midpoint;
             }
         }
-        
+        // Finding in which part of pivot is out target lies
         int start = left;
         left = 0;
         right = nums.length-1;
@@ -22,7 +22,7 @@ class Solution {
         } else {
             right = start;
         }
-        
+        // Standard binarysearch
         while(left <= right){
             int midpoint = left + (right - left) / 2;
             if(nums[midpoint] == target){
