@@ -1,21 +1,27 @@
 class Solution {
     public String reverseWords(String s) {
-        StringBuilder sb = new StringBuilder();
-        int lastIndex = -1;
+        int lastSpace = -1;
+        char[] chArr = s.toCharArray();
         
-        for(int startIndex = 0; startIndex < s.length(); startIndex++){
-            if(startIndex == s.length() - 1 || s.charAt(startIndex) == ' '){
-                int reverseIndex = (startIndex == s.length() - 1) ? startIndex : startIndex - 1;
-                for(; reverseIndex > lastIndex; reverseIndex--){
-                    sb.append(s.charAt(reverseIndex));
-                }
-                if(startIndex != s.length() - 1){
-                        sb.append(' ');
-                }
-                lastIndex = startIndex;
+        for(int startIndex = 0; startIndex <= chArr.length; startIndex++){
+            if(startIndex == chArr.length || chArr[startIndex] == ' '){
+                int start = lastSpace + 1;
+                int end = startIndex - 1;
+                reverse(chArr, start, end);
+                lastSpace = startIndex;
             }
         }
-        return sb.toString();
+        return new String(chArr);
+    }
+    
+    public void reverse(char[] chArr, int start, int end){
+        while(start < end){
+            char temp = chArr[start];
+            chArr[start] = chArr[end];
+            chArr[end] = temp;
+            start++;
+            end--;
+        }
     }
     // TC : O(n) SC : O(1)
 }
