@@ -10,32 +10,46 @@
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        if(lists == null || lists.length == 0)
-            return null;
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
         
-        ListNode head = new ListNode(0);
-        ListNode temp = head;
-        List<Integer> list = new ArrayList<>();
-        
-        for(ListNode l : lists){
-            while(l != null){
-                list.add(l.val);
-                l = l.next;
+        for(ListNode list : lists){
+            while(list != null){
+                pq.add(list.val);
+                list = list.next;
             }
         }
-        Collections.sort(list);
-        for(int val : list){
-            temp.next = new ListNode(val);
-            temp = temp.next;
+        
+        ListNode ans = new ListNode(0);
+        if(pq.size() == 0){
+            return null;
+        } else {
+            ListNode temp = ans;
+            while(pq.size() != 0){
+                temp.next = new ListNode(pq.poll());
+                temp = temp.next;
+            }
         }
-        return head.next;
+        return ans.next;
     }
 }
 
-// Creating one ArrayList of all K LinkedList's 
-// Sort the ArrayList and make ArrayList to LinkedList and return it
-// Time = O(n log n)
-// Space = O(n) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
