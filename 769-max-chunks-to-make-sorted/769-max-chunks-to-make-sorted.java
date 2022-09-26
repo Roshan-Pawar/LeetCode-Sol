@@ -1,20 +1,15 @@
 class Solution {
     public int maxChunksToSorted(int[] arr) {
-        int n = arr.length;
-        int[] max = new int[n];
+        int chunks = 0, max = 0;
         
-        max[0] = arr[0];
-        for(int i = 1; i < n; i++){
-            max[i] = Math.max(max[i - 1], arr[i]); 
-        }
-        
-        int chunks = 0;
-        for(int i = 0; i < n; i++){
-            if(max[i] == i)
+        for(int i = 0; i < arr.length; i++){
+            max = Math.max(max, arr[i]);
+            if(max == i){
                 chunks++;
+            }
         }
         return chunks;
     }
-    // TC & SC : O(n)
+    // TC : O(n) & SC : O(1)
     // https://leetcode.com/problems/max-chunks-to-make-sorted/discuss/113528/Simple-Java-O(n)-Solution-with-detailed-explanation
 }
