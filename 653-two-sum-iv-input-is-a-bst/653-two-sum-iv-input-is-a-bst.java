@@ -12,19 +12,31 @@
  *         this.right = right;
  *     }
  * }
- */ 
-//Self Explanatory code
+ */
 class Solution {
-    Set<Integer> set = new HashSet<>();
+    ArrayList<Integer> list = new ArrayList<>();
     public boolean findTarget(TreeNode root, int k) {
-        if(k == 0) return true;
-        if(root == null) return false;
+        inorder(root);
+        int len = list.size();
+        int l = 0, r = len - 1;
         
-        int curr = root.val;
-        if(set.contains(k - curr)) return true;
-        set.add(curr);
+        while(l < r){
+            if(list.get(l) + list.get(r) == k)
+                return true;
+            else if (list.get(l) + list.get(r) > k)
+                r--;
+            else
+                l++;
+        }
+        return false;
+    }
+    
+    public void inorder(TreeNode node){
+        if(node == null) return;
         
-        return findTarget(root.left, k) || findTarget(root.right, k);
+        inorder(node.left);
+        list.add(node.val);
+        inorder(node.right);
     }
     // TC & SC : O(n)
 }
