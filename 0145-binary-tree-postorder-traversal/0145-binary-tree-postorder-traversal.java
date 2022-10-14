@@ -12,11 +12,11 @@
  *         this.right = right;
  *     }
  * }
- */  // Using 2 Stack
+ */  // Using 1 Stack
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
         Stack<TreeNode> s1 = new Stack<>();
-        Stack<TreeNode> s2 = new Stack<>();
+        // Stack<TreeNode> s2 = new Stack<>();
         List<Integer> list = new ArrayList<>();
         
         if(root == null) return list;
@@ -24,15 +24,17 @@ class Solution {
         
         while(!s1.isEmpty()){
             root = s1.pop();
-            s2.push(root);
+            // s2.push(root);
+            list.add(root.val);
             if(root.left != null) s1.push(root.left);
             if(root.right != null) s1.push(root.right);
         }
         
-        while(!s2.isEmpty()){
-            list.add(s2.pop().val);
-        }
+        // while(!s2.isEmpty()){
+        //     list.add(s2.pop().val);
+        // }
+        Collections.reverse(list);
         return list;
     }
-    // TC : O(n) & SC : O(2n)
+    // TC : O(n) & SC : O(n)
 }
