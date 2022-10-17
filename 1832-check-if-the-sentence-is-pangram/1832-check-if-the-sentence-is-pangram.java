@@ -1,11 +1,14 @@
 class Solution {
     public boolean checkIfPangram(String sentence) {
-        Set<Character> ch = new HashSet<>();
-        // Add every char in HashSet 
-        for(char currChar : sentence.toCharArray())
-            ch.add(currChar);
-        // return true if set soze is 26 if less return false
-        return ch.size() == 26;
+        boolean[] ch = new boolean[26];
+        // make value true in ch array for every occured character in sentence
+        for(Character cha : sentence.toCharArray())
+            ch[(int) (cha - 'a')] = true;
+        // return false if any index contains false value
+        for(boolean tf : ch)
+            if(!tf)
+                return false;
+        return true;
     }
-    // TC & SC : O(n)
+    
 }
