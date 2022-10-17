@@ -1,13 +1,11 @@
 class Solution {
     public boolean checkIfPangram(String sentence) {
-        // Check for every ch in alphabets
-        for(int i = 0; i < 26; i++){
-            char ch = (char) ('a' + i);
-            // if ch contains in sentence then it will return positive index number
-            // -1 means ch does not contain in sentence
-            if(sentence.indexOf(ch) == -1) return false;
-        }
-        return true;
+        Set<Character> ch = new HashSet<>();
+        // Add every char in HashSet 
+        for(char currChar : sentence.toCharArray())
+            ch.add(currChar);
+        // return true if set soze is 26 if less return false
+        return ch.size() == 26;
     }
-    // TC : O(n)
+    // TC & SC : O(n)
 }
