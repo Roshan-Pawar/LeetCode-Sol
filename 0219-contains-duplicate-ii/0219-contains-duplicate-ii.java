@@ -1,13 +1,15 @@
-class Solution {
+class Solution { // Sliding Window
     public boolean containsNearbyDuplicate(int[] nums, int k) {
-        if(k == 0) return false;
-        HashMap<Integer, Integer> map = new HashMap<>();
-        
+        if (k == 0) return false;
+        Set<Integer> set = new HashSet<>();
         for(int i = 0; i < nums.length; i++){
-            if(map.containsKey(nums[i]) && i - map.get(nums[i]) <= k) 
+            if(set.contains(nums[i])){
                 return true;
-            else
-                map.put(nums[i], i);
+            }
+            if(i >= k){
+                set.remove(nums[i - k]);
+            }
+            set.add(nums[i]);
         }
         return false;
     }
