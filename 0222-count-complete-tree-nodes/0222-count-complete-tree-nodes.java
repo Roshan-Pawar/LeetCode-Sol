@@ -15,18 +15,6 @@
  */
 class Solution {
     public int countNodes(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        inorder(root, list);
-        return list.size();
+        return (root == null) ? 0 : 1 + countNodes(root.left) + countNodes(root.right);  
     }
-    
-    public void inorder(TreeNode root, List<Integer> list){
-        if(root == null)
-            return;
-        inorder(root.left, list);
-        list.add(root.val);
-        inorder(root.right, list);
-    }
-    // Return size of list use any traversal
-    
 }
